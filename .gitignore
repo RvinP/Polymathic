@@ -1,0 +1,39 @@
+# zależności — odtwarza je npm install / npm ci
+node_modules/
+
+# prywatne dane uczącego się (profil, tematy, sesje, lekcje, materiały);
+# świeży klon dostaje neutralny szablon z data-template/
+dane/
+dane.przed-migracja-*/
+*.polymathic.tar.gz
+
+# lokalne ustawienia i sekrety
+.claude/settings.local.json
+CLAUDE.local.md
+.env
+.env.*
+!.env.example
+
+# prywatna lista słów dla strażnika (scripts/check-repo.mjs)
+.private-patterns
+
+# notatki projektowe autora; publikujemy tylko docs/research/
+docs/specs/
+docs/polymathic-opis-systemu.md
+
+# brudnopisy
+work/
+tmp/
+
+# śmieci systemu i edytorów
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~
+
+# logi i artefakty testów
+*.log
+npm-debug.log*
+coverage/

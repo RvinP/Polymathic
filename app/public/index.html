@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Polymathic</title>
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%23C4471B'/%3E%3Cstop offset='1' stop-color='%2334598F'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='3' y='12' width='26' height='8' rx='2' fill='url(%23g)'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/vendor/katex.css">
+  <link rel="stylesheet" href="/vendor/xterm.css">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/studio.css">
+  <script>
+    // The theme is set before rendering so the page does not flicker.
+    // One-time fallback: before the English rename the key was 'kuznia-motyw'; move it to 'polymathic-theme'.
+    try {
+      let t = localStorage.getItem('polymathic-theme');
+      const legacy = localStorage.getItem('kuznia-motyw');
+      if (t === null && legacy !== null) { t = legacy; localStorage.setItem('polymathic-theme', legacy); }
+      localStorage.removeItem('kuznia-motyw');
+      document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
+    } catch {}
+  </script>
+</head>
+<body>
+  <a class="skip" href="#content">Przejdź do treści</a>
+  <div class="layout">
+    <header class="sidebar">
+      <a class="brand" href="#/studio" aria-label="Polymathic — nauka">
+        <span class="brand-name">Polymathic</span>
+        <span class="brand-sub">ŁĄCZ. ROZUMIEJ. ODKRYWAJ.</span>
+      </a>
+      <nav class="nav" aria-label="Widoki">
+        <a href="#/studio" data-view="studio"><span aria-hidden="true">◈</span> Nauka</a>
+        <a href="#/library" data-view="library"><span aria-hidden="true">▱</span> Biblioteka</a>
+        <a href="#/reviews" data-view="reviews"><span aria-hidden="true">↻</span> Powtórki</a>
+        <a href="#/settings" data-view="settings"><span aria-hidden="true">⚙</span> Ustawienia</a>
+        <details class="nav-more"><summary>Więcej</summary>
+          <a href="#/files" data-view="files" hidden>Pliki</a>
+          <a href="#/chat" data-view="chat">Czat z kartami</a>
+          <a href="#/questions" data-view="questions">Moje pytania</a>
+          <a href="#/sessions" data-view="sessions">Dziennik</a>
+          <a href="#/dashboard" data-view="dashboard">Postępy</a>
+          <a href="#/profile" data-view="profile">Profil</a>
+        </details>
+      </nav>
+      <div class="sidebar-footer">
+        <span class="live" id="live-status" title="Widok odświeża się sam, gdy AI zapisze postęp nauki">łączenie…</span>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Zmień motyw">Motyw: auto</button>
+      </div>
+    </header>
+    <main id="content" class="content" tabindex="-1">
+      <p class="loading">Wczytuję dane…</p>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="quiz-backdrop" id="quiz" hidden>
+    <div class="quiz-dialog" role="dialog" aria-modal="true" aria-labelledby="quiz-question" tabindex="-1"></div>
+  </div>
+  <script src="/vendor/purify.js"></script>
+  <script src="/vendor/xterm.js"></script>
+  <script src="/vendor/xterm-fit.js"></script>
+  <script src="/vendor/katex.js"></script>
+  <script src="/vendor/mermaid.js"></script>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

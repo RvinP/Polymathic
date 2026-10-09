@@ -1,0 +1,23 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { renderSessionPanel } from '../app/public/session-panel.js';
+import { planSession, recordAttempt, sessionView } from '../scripts/session-core.mjs';
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+const now = new Date();
+test('the learning rail escapes saved content, hides evidence by default, and exposes only the current action', () => {
+  let s = planSession({ goal: '<img src=x onerror=alert(1)>' }, [], [], now);
+  let html = renderSessionPanel(sessionView(s, now), esc);
+  assert.ok(!html.includes('<img'));
+  assert.ok(html.includes('&lt;img'));
+  assert.ok(!html.includes('Dowody i odłożone'));
+  s = recordAttempt(s, { sessionId: s.id, id: '1', taskId: 't1', question: 'Pytanie?', answer: '<script>bad()</script>', evidence: [{ concept: 'orientation', outcome: 'assisted', helpUsed: true, reason: 'Po przykładzie.' }] }, now);
+  html = renderSessionPanel(sessionView(s, now), esc);
+  assert.ok(!html.includes('<script>'));
+  assert.match(html, /<details class="session-evidence">/);
+  assert.ok(!html.includes('<details open'));
+  assert.ok(html.includes('Z pomocą'));
+  s.endedAt = now.toISOString(); s.nextStep = 'Następny konkretny krok.';
+  html = renderSessionPanel(sessionView(s, now), esc);
+  assert.ok(html.includes(s.nextStep));
+  assert.ok(!html.includes('<button'));
+});

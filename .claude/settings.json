@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node scripts/srs.mjs:*)",
+      "Bash(node scripts/session.mjs:*)",
+      "Bash(node scripts/quiz.mjs:*)",
+      "Bash(node scripts/render.mjs:*)",
+      "Bash(node scripts/new-topic.mjs:*)"
+    ]
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          { "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/scripts/log-lesson.mjs\" 2>/dev/null || true", "async": true }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|AskUserQuestion",
+        "hooks": [
+          { "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/scripts/log-lesson.mjs\" 2>/dev/null || true", "async": true }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash|AskUserQuestion",
+        "hooks": [
+          { "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/scripts/log-lesson.mjs\" 2>/dev/null || true", "async": true }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          { "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/scripts/log-lesson.mjs\" 2>/dev/null || true", "async": true }
+        ]
+      }
+    ]
+  }
+}

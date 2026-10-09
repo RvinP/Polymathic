@@ -1,0 +1,3 @@
+#!/bin/sh
+# Strażnik prywatności przed każdym commitem (włącz: git config core.hooksPath .githooks).
+exec node scripts/check-repo.mjs

@@ -1,0 +1,71 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "type": "string",
+      "enum": [
+        "explain",
+        "challenge",
+        "feedback",
+        "question",
+        "summary"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "body": {
+      "type": "string"
+    },
+    "question": {
+      "type": "string"
+    },
+    "hints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "goal": {
+      "type": "string"
+    },
+    "focus": {
+      "type": "string"
+    },
+    "concepts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "outcome": {
+      "type": "string",
+      "enum": [
+        "none",
+        "independent",
+        "assisted",
+        "not_yet"
+      ]
+    },
+    "takeaway": {
+      "type": "string"
+    },
+    "park": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "kind",
+    "title",
+    "body",
+    "question",
+    "hints",
+    "goal",
+    "focus",
+    "concepts",
+    "outcome",
+    "takeaway",
+    "park"
+  ]
+}

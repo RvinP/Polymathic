@@ -1,0 +1,33 @@
+{
+  "name": "polymathic",
+  "version": "1.0.0",
+  "description": "Polymathic — lokalna przestrzeń nauki z AI",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node app/server.mjs",
+    "today": "node scripts/srs.mjs today",
+    "stats": "node scripts/srs.mjs stats",
+    "new-topic": "node scripts/new-topic.mjs",
+    "clear-examples": "node scripts/clear-examples.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "postinstall": "node scripts/fix-pty.mjs && node scripts/prepare-data.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@xterm/addon-fit": "^0.11.0",
+    "@xterm/xterm": "^6.0.0",
+    "dompurify": "^3.4.16",
+    "gray-matter": "^4.0.3",
+    "katex": "^0.19.0",
+    "marked": "^18.1.0",
+    "mermaid": "^12.1.0",
+    "node-pty": "^1.1.0",
+    "puppeteer-core": "^25.12.0",
+    "ts-fsrs": "^5.4.2",
+    "ws": "^8.22.0"
+  },
+  "license": "MIT"
+}
